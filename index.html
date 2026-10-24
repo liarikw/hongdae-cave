@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hongdae Cave">
+<meta name="theme-color" content="#14110f">
+<title>Hongdae Cave</title>
+<style>
+:root{--bg:#14110f;--panel:#1e1916;--panel2:#2a231e;--line:#3a312a;--text:#f3ece4;--mute:#a39a90;--arik:#5ec2ff;--shiho:#ff7eb6;--both:#ffd166;--ok:#6ee7a0;--danger:#ff5d5d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Apple SD Gothic Neo","Helvetica Neue",sans-serif;overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+button,input,select{font:inherit;color:inherit}
+i{font-style:normal}
+#app{display:flex;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+nav{width:78px;flex:none;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:6px}
+.logo{font-size:11px;font-weight:800;letter-spacing:.5px;text-align:center;line-height:1.1;color:var(--both);margin-bottom:4px}
+.tab{width:62px;padding:8px 0 6px;border:0;border-radius:14px;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mute)}
+.tab span{font-size:22px;line-height:1}
+.tab.on{background:var(--panel2);color:var(--text)}
+.sp{flex:1}
+.who{width:46px;height:46px;border-radius:50%;border:3px solid var(--arik);background:var(--panel2);font-weight:800;font-size:18px}
+.who.shiho{border-color:var(--shiho)}
+.gear{border:0;background:transparent;font-size:20px;padding:6px;opacity:.7}
+.lang{border:1px solid var(--line);background:var(--panel2);border-radius:10px;font-size:13px;font-weight:700;padding:4px 10px}
+main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{height:50px;flex:none;display:flex;align-items:center;gap:14px;padding:0 14px;border-bottom:1px solid var(--line)}
+.clock{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.date{font-size:12px;color:var(--mute);line-height:1.2;white-space:nowrap}
+#roast{flex:1;min-width:0;text-align:right;font-size:14px;font-weight:600;color:var(--both);transition:opacity .5s;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+section{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;display:none}
+section.on{display:block}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+input[type=text],input[type=number],select{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:16px;min-width:0;-webkit-user-select:text;user-select:text}
+input[type=text]{flex:1;min-width:120px}
+.btn{border:0;border-radius:12px;padding:10px 14px;background:var(--both);color:#241a00;font-weight:700;font-size:15px}
+.btn.sec{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.btn.danger{background:var(--danger);color:#fff}
+.chips{display:flex;gap:6px;margin-bottom:8px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:20px;padding:5px 12px;font-size:13px;color:var(--mute)}
+.chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chore{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px 10px;min-height:56px}
+.chk{width:36px;height:36px;border-radius:50%;border:2.5px solid var(--mute);background:transparent;flex:none;font-size:18px;color:transparent}
+.chore.done{opacity:.45}
+.chore.done .chk{background:var(--ok);border-color:var(--ok);color:#052e16}
+.chore.done .t{text-decoration:line-through}
+.ct{flex:1;min-width:0}
+.t{font-size:16px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m{font-size:11px;color:var(--mute);margin-top:2px;display:flex;gap:8px;align-items:center}
+.tag{border-radius:8px;padding:1px 7px;font-weight:700;color:#14110f;font-size:11px}
+.tag.arik{background:var(--arik)}.tag.shiho{background:var(--shiho)}.tag.both{background:var(--both)}
+.x{border:0;background:transparent;color:var(--mute);font-size:22px;padding:4px 8px}
+.empty{color:var(--mute);text-align:center;padding:30px 10px;font-size:15px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px}
+.ph{aspect-ratio:1;border-radius:10px;object-fit:cover;width:100%;background:var(--panel2)}
+.pre{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.pre .btn{padding:10px 12px}
+.timer{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:8px}
+.timer .big{font-size:38px;font-weight:800;font-variant-numeric:tabular-nums;min-width:140px}
+.timer .lbl{flex:1;font-size:16px;font-weight:600}
+.overlay{position:fixed;inset:0;display:none;z-index:50}
+.overlay.on{display:flex}
+#alarm{background:#b91c1c;align-items:center;justify-content:center;flex-direction:column;gap:16px;animation:fl 1s infinite;text-align:center;padding:20px}
+#alarm h1{font-size:56px;margin:0}
+#alarm p{font-size:26px;margin:0;font-weight:700}
+@keyframes fl{50%{background:#7f1d1d}}
+#show{background:#000;align-items:center;justify-content:center}
+#show img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity .7s;opacity:0}
+#show .info{position:absolute;left:18px;bottom:14px;right:18px;display:flex;justify-content:space-between;align-items:flex-end;text-shadow:0 1px 6px #000;pointer-events:none}
+#show .sc{font-size:44px;font-weight:700;font-variant-numeric:tabular-nums}
+#show .sr{font-size:15px;font-weight:600;color:var(--both);max-width:50%;text-align:right}
+#lb{background:rgba(0,0,0,.94);align-items:center;justify-content:center}
+#lb img{max-width:100%;max-height:100%;object-fit:contain}
+#lb .bar{position:absolute;top:calc(8px + env(safe-area-inset-top));right:10px;display:flex;gap:8px}
+#lb .nav{position:absolute;top:50%;transform:translateY(-50%);font-size:34px;background:rgba(0,0,0,.4);border:0;border-radius:50%;width:52px;height:52px}
+#sheet{background:rgba(0,0,0,.7);align-items:center;justify-content:center}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;width:min(560px,94vw);max-height:90dvh;overflow:auto}
+.rl{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.rl span{flex:1}
+#toast{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:8px 16px;border-radius:20px;font-weight:600;font-size:14px;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none;max-width:90vw}
+#toast.on{opacity:1}
+@media (orientation:portrait){
+ #app{flex-direction:column-reverse}
+ nav{width:auto;flex-direction:row;border-right:0;border-top:1px solid var(--line);padding:4px 8px;justify-content:space-around}
+ .logo{display:none}.sp{display:none}
+ .grid2{grid-template-columns:1fr}
+ .timer .big{font-size:30px;min-width:110px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav>
+    <div class="logo">HONGDAE<br>CAVE</div>
+    <button class="tab on" data-tab="chores"><span>✅</span><i data-i18n="chores">Chores</i></button>
+    <button class="tab" data-tab="photos"><span>🖼️</span><i data-i18n="photos">Photos</i></button>
+    <button class="tab" data-tab="timers"><span>⏱️</span><i data-i18n="timers">Timers</i></button>
+    <div class="sp"></div>
+    <button class="lang" id="lang">한</button>
+    <button class="gear" id="gear">⚙️</button>
+    <button class="who" id="who">A</button>
+  </nav>
+  <main>
+    <div class="top">
+      <div class="clock" id="clock">--:--</div>
+      <div class="date" id="date"></div>
+      <div id="roast"></div>
+    </div>
+    <section id="s-chores" class="on">
+      <div class="row">
+        <input type="text" id="cTitle" data-ph="newChore" maxlength="80" enterkeyhint="done">
+        <select id="cOwner"><option value="both" data-i18n="both">Both</option><option value="arik" data-i18n="arik">Arik</option><option value="shiho" data-i18n="shiho">Shi Ho</option></select>
+        <select id="cRepeat"><option value="none" data-i18n="oneoff">One-off</option><option value="daily" data-i18n="daily">Daily</option><option value="weekly" data-i18n="weekly">Weekly</option></select>
+        <button class="btn" id="cAdd" data-i18n="add">Add</button>
+      </div>
+      <div class="chips" id="cFilter"></div>
+      <div class="grid2" id="cList"></div>
+    </section>
+    <section id="s-photos">
+      <div class="row">
+        <label class="btn" for="upl" data-i18n="addPhotos">＋ Add photos</label>
+        <input id="upl" type="file" accept="image/*" multiple hidden>
+        <button class="btn sec" id="showBtn" data-i18n="slideshow">▶ Slideshow</button>
+        <span id="pCount" style="color:var(--mute);font-size:13px"></span>
+      </div>
+      <div class="photos" id="pGrid"></div>
+    </section>
+    <section id="s-timers">
+      <div class="row">
+        <input type="text" id="tLabel" data-ph="timerLabel" maxlength="40">
+        <input type="number" id="tMin" data-ph="min" inputmode="numeric" min="1" max="999" style="width:80px">
+        <button class="btn" id="tStart" data-i18n="start">Start</button>
+      </div>
+      <div class="pre" id="tPre"></div>
+      <div id="tList"></div>
+    </section>
+  </main>
+</div>
+
+<div id="alarm" class="overlay"><h1 data-i18n="timesUp">⏰ TIME'S UP</h1><p id="alarmLbl"></p><button class="btn sec" id="alarmOk" data-i18n="dismiss" style="font-size:22px;padding:14px 40px">Dismiss</button></div>
+<div id="show" class="overlay"><img id="showImg" alt=""><div class="info"><div class="sc" id="showClock"></div><div class="sr" id="showRoast"></div></div></div>
+<div id="lb" class="overlay"><img id="lbImg" alt=""><button class="nav" id="lbPrev" style="left:10px">‹</button><button class="nav" id="lbNext" style="right:10px">›</button><div class="bar"><button class="btn danger" id="lbDel" data-i18n="del">Delete</button><button class="btn sec" id="lbClose" data-i18n="close">Close</button></div></div>
+<div id="sheet" class="overlay"><div class="card">
+  <div class="row" style="justify-content:space-between"><b style="font-size:18px" data-i18n="roastTitle">Roast messages</b><button class="btn sec" id="sheetClose" data-i18n="done">Done</button></div>
+  <div class="row"><input type="text" id="rText" data-ph="roastPh" maxlength="140"></div>
+  <div class="row"><input type="text" id="rTextKo" data-ph="roastPhKo" maxlength="140"><select id="rTarget"><option value="both" data-i18n="both">Both</option><option value="arik" data-i18n="arik">Arik</option><option value="shiho" data-i18n="shiho">Shi Ho</option></select><button class="btn" id="rAdd" data-i18n="add">Add</button></div>
+  <div id="rList"></div>
+</div></div>
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB_URL='https://ysbfbcphewxpwrlkfwxf.supabase.co';
+const SB_KEY='sb_publishable_DZ1RWN3axYd7nHkzYzSWFA_nySi45KB';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+
+/* ---------- i18n ---------- */
+const L={
+en:{chores:'Chores',photos:'Photos',timers:'Timers',newChore:'New chore or task',both:'Both',arik:'Arik',shiho:'Shi Ho',oneoff:'One-off',daily:'Daily',weekly:'Weekly',add:'Add',all:'All',addPhotos:'＋ Add photos',slideshow:'▶ Slideshow',timerLabel:'Label (optional)',min:'min',minU:' min',hr:'1 hr',start:'Start',cancel:'Cancel',timesUp:"⏰ TIME'S UP",dismiss:'Dismiss',del:'Delete',close:'Close',roastTitle:'Roast messages',roastPh:'Add a message (English)',roastPhKo:'Korean (optional)',done:'Done',emptyChores:'Nothing to do. Suspicious.',emptyPhotos:'No photos yet. Add some so the cave has a soul.',emptyTimers:'No timers running.',emptyRoasts:'None yet.',nPhotos:n=>n+' photos',viewing:n=>'Viewing as '+n,uploading:(i,n)=>`Uploading ${i} of ${n}`,added:n=>`Added ${n} photo${n>1?'s':''}`,addFirst:'Add photos first',enterMin:'Enter minutes',confirmDel:'Delete this photo for both of you?',timer:'Timer',loadErr:'Load error: ',upFail:'Upload failed: ',initA:'A',initS:'S',locale:'en-US'},
+ko:{chores:'집안일',photos:'사진',timers:'타이머',newChore:'새 집안일 또는 할 일',both:'둘 다',arik:'아릭',shiho:'시호',oneoff:'한 번',daily:'매일',weekly:'매주',add:'추가',all:'전체',addPhotos:'＋ 사진 추가',slideshow:'▶ 슬라이드쇼',timerLabel:'이름 (선택)',min:'분',minU:'분',hr:'1시간',start:'시작',cancel:'취소',timesUp:'⏰ 시간 됐어!',dismiss:'끄기',del:'삭제',close:'닫기',roastTitle:'잔소리 메시지',roastPh:'메시지 추가 (영어)',roastPhKo:'한국어 (선택)',done:'완료',emptyChores:'할 일이 없다니. 수상한데.',emptyPhotos:'아직 사진이 없어요. 동굴에 영혼을 불어넣어 주세요.',emptyTimers:'실행 중인 타이머 없음.',emptyRoasts:'아직 없음.',nPhotos:n=>n+'장',viewing:n=>n+' 화면',uploading:(i,n)=>`업로드 중 ${i}/${n}`,added:n=>`사진 ${n}장 추가됨`,addFirst:'먼저 사진을 추가하세요',enterMin:'분을 입력하세요',confirmDel:'두 사람 모두에게서 이 사진을 삭제할까요?',timer:'타이머',loadErr:'불러오기 오류: ',upFail:'업로드 실패: ',initA:'아',initS:'시',locale:'ko-KR'}
+};
+let S={user:localStorage.getItem('cave_user')||'arik',lang:localStorage.getItem('cave_lang')||'en',tab:'chores',filter:'all',chores:[],timers:[],photos:[],roasts:[]};
+const t=(k,...a)=>{const v=(L[S.lang]||L.en)[k];return typeof v==='function'?v(...a):v};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let last=Date.now(),lbIdx=0,showOn=false,showTimer=null,showIdx=0,showOrder=[],lastRoast='';
+const rtext=r=>(S.lang==='ko'&&r.text_ko)?r.text_ko:r.text;
+
+function applyLang(){
+  document.documentElement.lang=S.lang;
+  document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=t(e.dataset.i18n));
+  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));
+  $('#lang').textContent=S.lang==='en'?'한':'EN';
+  $('#tPre').innerHTML=[1,5,10,15,20,30,45,60].map(m=>`<button class="btn sec" data-m="${m}">${m>=60?t('hr'):m+t('minU')}</button>`).join('');
+  $('#who').textContent=S.user==='arik'?t('initA'):t('initS');
+  ['chores','photos','timers','roasts'].forEach(render);
+}
+
+function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
+const photoUrl=p=>sb.storage.from('photos').getPublicUrl(p.path).data.publicUrl;
+
+/* ---------- data ---------- */
+async function load(tb){
+  const q={
+    chores:()=>sb.from('chores').select('*').order('created_at'),
+    timers:()=>sb.from('timers').select('*').eq('dismissed',false).order('ends_at'),
+    photos:()=>sb.from('photos').select('*').order('created_at',{ascending:false}),
+    roasts:()=>sb.from('roasts').select('*').order('created_at')
+  };
+  const {data,error}=await q[tb]();
+  if(error){toast(t('loadErr')+error.message);return}
+  S[tb]=data;
+  if(tb==='chores')await resetRepeats();
+  render(tb);
+}
+async function resetRepeats(){
+  const now=new Date(),day=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const wk=new Date(day);wk.setDate(day.getDate()-((day.getDay()+6)%7));
+  const stale=S.chores.filter(c=>c.done&&c.repeat!=='none'&&c.done_at&&new Date(c.done_at)<(c.repeat==='daily'?day:wk));
+  if(!stale.length)return;
+  const ids=stale.map(c=>c.id);
+  await sb.from('chores').update({done:false,done_at:null}).in('id',ids);
+  stale.forEach(c=>{c.done=false;c.done_at=null});
+}
+function subscribe(){
+  const ch=sb.channel('cave');
+  ['chores','timers','photos','roasts'].forEach(tb=>ch.on('postgres_changes',{event:'*',schema:'public',table:tb},()=>load(tb)));
+  ch.subscribe();
+}
+
+/* ---------- render ---------- */
+function render(tb){
+  if(tb==='chores')renderChores();
+  if(tb==='photos')renderPhotos();
+  if(tb==='timers')renderTimers();
+  if(tb==='roasts')renderRoasts();
+}
+function renderChores(){
+  const f=S.filter;
+  $('#cFilter').innerHTML=[['all',t('all')],['arik',t('arik')],['shiho',t('shiho')]].map(([k,n])=>`<button class="chip ${f===k?'on':''}" data-f="${k}">${n}</button>`).join('');
+  let list=S.chores.filter(c=>f==='all'||c.owner===f||c.owner==='both');
+  list.sort((a,b)=>(a.done-b.done)||(new Date(a.created_at)-new Date(b.created_at)));
+  $('#cList').innerHTML=list.length?list.map(c=>`<div class="chore ${c.done?'done':''}" data-id="${c.id}">
+    <button class="chk" data-act="toggle">✓</button>
+    <div class="ct"><div class="t">${esc(c.title)}</div><div class="m"><span class="tag ${c.owner}">${t(c.owner)}</span>${c.repeat!=='none'?`<span>🔁 ${t(c.repeat)}</span>`:''}</div></div>
+    <button class="x" data-act="del">×</button></div>`).join(''):`<div class="empty" style="grid-column:1/-1">${t('emptyChores')}</div>`;
+}
+function renderPhotos(){
+  $('#pCount').textContent=S.photos.length?t('nPhotos',S.photos.length):'';
+  $('#pGrid').innerHTML=S.photos.length?S.photos.map((p,i)=>`<img class="ph" loading="lazy" data-i="${i}" src="${photoUrl(p)}" alt="">`).join(''):`<div class="empty" style="grid-column:1/-1">${t('emptyPhotos')}</div>`;
+}
+function fmt(ms){ms=Math.max(0,ms);const s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),r=s%60;return(h?h+':'+String(m).padStart(2,'0'):m)+':'+String(r).padStart(2,'0')}
+function renderTimers(){
+  $('#tList').innerHTML=S.timers.length?S.timers.map(x=>`<div class="timer" data-id="${x.id}"><div class="big" data-end="${x.ends_at}">${fmt(new Date(x.ends_at)-Date.now())}</div><div class="lbl">${esc(x.label)}<div class="m"><span class="tag ${x.created_by}">${t(x.created_by)||''}</span></div></div><button class="btn sec" data-act="cancel">${t('cancel')}</button></div>`).join(''):`<div class="empty">${t('emptyTimers')}</div>`;
+}
+function renderRoasts(){
+  $('#rList').innerHTML=S.roasts.map(r=>`<div class="rl" data-id="${r.id}"><span>${esc(rtext(r))}</span><span class="tag ${r.target}" style="flex:none">${t(r.target)}</span><button class="x" data-act="rdel">×</button></div>`).join('')||`<div class="empty">${t('emptyRoasts')}</div>`;
+}
+
+/* ---------- roasts ---------- */
+function pickRoast(){
+  const pool=S.roasts.filter(r=>r.target==='both'||r.target===S.user);
+  if(!pool.length)return'';
+  let r;for(let i=0;i<5;i++){r=pool[Math.floor(Math.random()*pool.length)];if(rtext(r)!==lastRoast)break}
+  lastRoast=rtext(r);return lastRoast;
+}
+function rotateRoast(){
+  const el=$('#roast');el.style.opacity=0;
+  setTimeout(()=>{const x=pickRoast();el.textContent=x;$('#showRoast').textContent=x;el.style.opacity=1},500);
+}
+
+/* ---------- tabs / user / lang ---------- */
+function setTab(tb){
+  S.tab=tb;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===tb));
+  document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='s-'+tb));
+}
+function setUser(u,quiet){
+  S.user=u;localStorage.setItem('cave_user',u);
+  const w=$('#who');w.textContent=u==='arik'?t('initA'):t('initS');w.classList.toggle('shiho',u==='shiho');
+  if(!quiet)toast(t('viewing',t(u)));
+}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+$('#who').onclick=()=>{setUser(S.user==='arik'?'shiho':'arik');rotateRoast();tick()};
+$('#lang').onclick=()=>{S.lang=S.lang==='en'?'ko':'en';localStorage.setItem('cave_lang',S.lang);applyLang();rotateRoast();tick()};
+setUser(S.user,true);applyLang();
+
+/* ---------- chores ---------- */
+async function addChore(){
+  const title=$('#cTitle').value.trim();if(!title)return;
+  const {error}=await sb.from('chores').insert({title,owner:$('#cOwner').value,repeat:$('#cRepeat').value});
+  if(error)return toast(error.message);
+  $('#cTitle').value='';$('#cTitle').blur();load('chores');
+}
+$('#cAdd').onclick=addChore;
+$('#cTitle').addEventListener('keydown',e=>{if(e.key==='Enter')addChore()});
+$('#cFilter').onclick=e=>{const f=e.target.dataset.f;if(f){S.filter=f;renderChores()}};
+$('#cList').onclick=async e=>{
+  const act=e.target.dataset.act,row=e.target.closest('.chore');if(!act||!row)return;
+  const c=S.chores.find(x=>x.id===row.dataset.id);if(!c)return;
+  if(act==='toggle'){
+    c.done=!c.done;c.done_at=c.done?new Date().toISOString():null;renderChores();
+    await sb.from('chores').update({done:c.done,done_at:c.done_at}).eq('id',c.id);
+  }
+  if(act==='del'){
+    S.chores=S.chores.filter(x=>x.id!==c.id);renderChores();
+    await sb.from('chores').delete().eq('id',c.id);
+  }
+};
+
+/* ---------- photos ---------- */
+function compress(file){
+  return new Promise(res=>{
+    const img=new Image(),url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const max=1800,k=Math.min(1,max/Math.max(img.width,img.height));
+      const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      c.toBlob(b=>{URL.revokeObjectURL(url);res(b||file)},'image/jpeg',.85);
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);res(file)};
+    img.src=url;
+  });
+}
+$('#upl').onchange=async e=>{
+  const files=[...e.target.files];e.target.value='';let ok=0;
+  for(let i=0;i<files.length;i++){
+    toast(t('uploading',i+1,files.length));
+    const blob=await compress(files[i]);
+    const path=Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.jpg';
+    const up=await sb.storage.from('photos').upload(path,blob,{contentType:'image/jpeg'});
+    if(up.error){toast(t('upFail')+up.error.message);continue}
+    const ins=await sb.from('photos').insert({path,uploaded_by:S.user});
+    if(ins.error){toast(ins.error.message);continue}
+    ok++;
+  }
+  if(ok)toast(t('added',ok));
+  load('photos');
+};
+$('#pGrid').onclick=e=>{const i=e.target.dataset.i;if(i!==undefined)openLb(+i)};
+function openLb(i){lbIdx=i;$('#lbImg').src=photoUrl(S.photos[i]);$('#lb').classList.add('on')}
+function lbStep(d){if(!S.photos.length)return;openLb((lbIdx+d+S.photos.length)%S.photos.length)}
+$('#lbPrev').onclick=()=>lbStep(-1);$('#lbNext').onclick=()=>lbStep(1);
+$('#lbClose').onclick=()=>$('#lb').classList.remove('on');
+$('#lbDel').onclick=async()=>{
+  const p=S.photos[lbIdx];if(!p||!confirm(t('confirmDel')))return;
+  await sb.storage.from('photos').remove([p.path]);await sb.from('photos').delete().eq('id',p.id);
+  $('#lb').classList.remove('on');load('photos');
+};
+
+/* slideshow */
+function showNext(){
+  if(!S.photos.length)return stopShow();
+  const img=$('#showImg');img.style.opacity=0;
+  setTimeout(()=>{
+    if(showIdx>=showOrder.length){showOrder=S.photos.map((_,i)=>i).sort(()=>Math.random()-.5);showIdx=0}
+    const p=S.photos[showOrder[showIdx++]];if(!p)return;
+    img.onload=()=>img.style.opacity=1;img.src=photoUrl(p);
+  },700);
+}
+function startShow(){
+  if(!S.photos.length)return toast(t('addFirst'));
+  showOn=true;showIdx=0;showOrder=[];$('#show').classList.add('on');showNext();
+  $('#showRoast').textContent=$('#roast').textContent;
+  showTimer=setInterval(showNext,9000);
+}
+function stopShow(){showOn=false;clearInterval(showTimer);$('#show').classList.remove('on');last=Date.now()}
+$('#showBtn').onclick=startShow;$('#show').onclick=stopShow;
+
+/* ---------- timers + alarm ---------- */
+async function startTimer(min,label){
+  min=+min;if(!min||min<1)return toast(t('enterMin'));
+  const {error}=await sb.from('timers').insert({label:(label||'').trim()||t('timer'),ends_at:new Date(Date.now()+min*60000).toISOString(),created_by:S.user});
+  if(error)return toast(error.message);
+  $('#tMin').value='';$('#tLabel').value='';load('timers');
+}
+$('#tPre').onclick=e=>{const m=e.target.dataset.m;if(m)startTimer(m,$('#tLabel').value)};
+$('#tStart').onclick=()=>startTimer($('#tMin').value,$('#tLabel').value);
+$('#tList').onclick=async e=>{
+  if(e.target.dataset.act!=='cancel')return;
+  const id=e.target.closest('.timer').dataset.id;
+  S.timers=S.timers.filter(x=>x.id!==id);renderTimers();
+  await sb.from('timers').update({dismissed:true}).eq('id',id);
+};
+let ac,alarmBeep=null,alarmId=null;
+function unlockAudio(){if(!ac){try{ac=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(ac&&ac.state==='suspended')ac.resume()}
+document.addEventListener('pointerdown',unlockAudio);
+function beep(){if(!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.type='square';o.frequency.value=880;g.gain.value=.18;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.28)}
+function checkAlarm(){
+  const due=S.timers.find(x=>new Date(x.ends_at)<=Date.now());
+  if(due&&alarmId!==due.id){
+    alarmId=due.id;$('#alarmLbl').textContent=due.label;$('#alarm').classList.add('on');
+    if(showOn)stopShow();beep();clearInterval(alarmBeep);alarmBeep=setInterval(beep,900);
+  }
+  if(!due&&alarmId){alarmId=null;$('#alarm').classList.remove('on');clearInterval(alarmBeep)}
+}
+$('#alarmOk').onclick=async()=>{
+  const id=alarmId;alarmId=null;$('#alarm').classList.remove('on');clearInterval(alarmBeep);
+  S.timers=S.timers.filter(x=>x.id!==id);renderTimers();
+  if(id)await sb.from('timers').update({dismissed:true}).eq('id',id);
+};
+
+/* ---------- roast editor ---------- */
+$('#gear').onclick=()=>{renderRoasts();$('#sheet').classList.add('on')};
+$('#sheetClose').onclick=()=>$('#sheet').classList.remove('on');
+$('#rAdd').onclick=async()=>{
+  const text=$('#rText').value.trim(),ko=$('#rTextKo').value.trim();
+  if(!text&&!ko)return;
+  const {error}=await sb.from('roasts').insert({text:text||ko,text_ko:ko||null,target:$('#rTarget').value});
+  if(error)return toast(error.message);
+  $('#rText').value='';$('#rTextKo').value='';load('roasts');
+};
+$('#rList').onclick=async e=>{
+  if(e.target.dataset.act!=='rdel')return;
+  const id=e.target.closest('.rl').dataset.id;
+  S.roasts=S.roasts.filter(r=>r.id!==id);renderRoasts();
+  await sb.from('roasts').delete().eq('id',id);
+};
+
+/* ---------- clock, idle, wake lock ---------- */
+function tick(){
+  const d=new Date(),loc=t('locale');
+  const time=d.toLocaleTimeString(loc,{hour:'numeric',minute:'2-digit'});
+  $('#clock').textContent=time;$('#showClock').textContent=time;
+  $('#date').innerHTML=d.toLocaleDateString(loc,{weekday:'long'})+'<br>'+d.toLocaleDateString(loc,{month:'short',day:'numeric'});
+  document.querySelectorAll('.big[data-end]').forEach(el=>el.textContent=fmt(new Date(el.dataset.end)-Date.now()));
+  checkAlarm();
+  if(!showOn&&!alarmId&&S.photos.length&&Date.now()-last>120000&&!$('#lb').classList.contains('on')&&!$('#sheet').classList.contains('on')&&document.activeElement.tagName!=='INPUT')startShow();
+}
+['pointerdown','keydown','scroll'].forEach(ev=>document.addEventListener(ev,()=>{last=Date.now()},true));
+let wl=null;
+async function wake(){try{if('wakeLock' in navigator&&document.visibilityState==='visible')wl=await navigator.wakeLock.request('screen')}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){wake();['chores','timers','photos','roasts'].forEach(load)}});
+document.addEventListener('pointerdown',wake,{once:true});
+
+/* ---------- boot ---------- */
+(async()=>{
+  await Promise.all(['chores','timers','photos','roasts'].map(load));
+  rotateRoast();setInterval(rotateRoast,25000);
+  setInterval(tick,1000);tick();wake();subscribe();
+  setInterval(()=>['chores','timers','photos'].forEach(load),120000);
+})();
+</script>
+</body>
+</html>
