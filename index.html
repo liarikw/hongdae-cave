@@ -182,6 +182,70 @@ input[type=date].fld,input[type=number].fld{width:auto;margin:0;padding:10px 16p
 #toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);padding:12px 24px;border-radius:999px;font-weight:700;font-size:19px;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none;max-width:90vw}
 #toast.on{opacity:1}
 
+/* ---- v4 scale-up for iPhone 11 landscape (~800x383 usable) ---- */
+#app{gap:12px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+.hj{font-size:.8em;opacity:.88;font-weight:600;margin:0}
+aside{width:224px;padding:10px 8px 8px}
+.brand{padding:2px 10px 6px}
+.brand .sub{font-size:19px;font-weight:800;color:#fff;margin:0}
+.nr{min-height:44px;font-size:21px;padding:3px 10px;border-radius:16px}
+.nr .ic{width:38px;height:38px;font-size:21px;border-radius:11px}
+.nr .bd{font-size:18px}
+.nr .bd.hot{padding:2px 10px;min-width:30px}
+.me{gap:8px;padding:6px 2px 0}
+.av{width:58px;height:58px;font-size:25px}
+.who .nm{font-size:20px}
+.circ{width:54px;height:54px;font-size:23px}
+#roastBar{min-height:82px;padding:10px 28px}
+#roast{font-size:31px}
+.hd h2{font-size:38px}
+.plus{width:62px;height:62px;font-size:38px}
+.pill{font-size:21px;padding:11px 20px}
+.cap{font-size:22px;padding:13px 24px}
+.dot{width:14px;height:14px}
+.wg{grid-auto-rows:141px}
+.w .wl{font-size:17px}
+.w .big{font-size:62px}
+.w .s{font-size:18px}
+.w-clock .dt{font-size:27px}
+.w-clock .yr{font-size:18px}
+.w-photo .ov{font-size:18px}
+.wl2 li{font-size:20px}
+.note-txt{font-size:23px}
+.tiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.tile{min-height:150px;padding:16px}
+.ico{width:62px;height:62px;font-size:32px}
+.tile .t{font-size:24px}
+.m{font-size:17px}
+.tag{font-size:15px;padding:3px 11px}
+.x{width:46px;height:46px;font-size:26px}
+.grp{font-size:17px}
+.trow{padding:14px 70px 14px 16px;gap:16px;border-radius:24px}
+.chk{width:56px;height:56px;font-size:26px}
+.trow .t{font-size:25px}
+.notes{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.note .meta{font-size:17px}
+.note .body{font-size:26px}
+.newb{font-size:14px;padding:2px 9px}
+.photos{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.pre .cap{font-size:24px;padding:16px 24px}
+.timer .bigt{font-size:76px;min-width:210px}
+.timer .lbl{font-size:27px}
+.card h3{font-size:31px}
+.fld{font-size:24px;padding:15px 20px}
+.flbl{font-size:18px;min-width:74px}
+.seg button{font-size:22px;padding:11px 18px}
+input[type=date].fld,input[type=number].fld{font-size:22px;padding:12px 18px}
+#toast{font-size:22px;padding:14px 26px}
+.rl{font-size:21px}
+#alarm h1{font-size:76px}#alarm p{font-size:36px}
+.me{justify-content:space-between;padding:6px 4px 0}.who{flex:none;padding:0}
+.hd{flex-wrap:nowrap}#cFilter{flex:1;min-width:0;overflow-x:auto}#cFilter::-webkit-scrollbar{display:none}#cFilter .pill{padding:10px 16px;flex:none}
+.brand .sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#roast{font-size:30px}
+#s-chores .hd .sp{display:none}#cFilter{gap:6px!important}#cFilter .pill{font-size:19px;padding:10px 14px}
+.nr{min-height:42px}.brand{padding:0 10px 4px}aside{padding-bottom:6px}
+
 @media (orientation:portrait){
  #app{flex-direction:column-reverse;padding-left:12px;padding-right:12px}
  aside{width:auto;flex-direction:row;padding:6px;border-radius:999px;overflow-x:auto}
@@ -198,7 +262,7 @@ input[type=date].fld,input[type=number].fld{width:auto;margin:0;padding:10px 16p
 <div id="wall"></div><div id="shade"></div>
 <div id="app">
   <aside class="glass blur">
-    <div class="brand"><h1>Hongdae Cave</h1><div class="sub" id="sideTime"></div></div>
+    <div class="brand"><div class="sub" id="sideTime"></div></div>
     <button class="nr on" data-tab="home"><span class="ic" style="background:#ff9f0a">🏠</span><span class="lb" data-i18n="home">Home</span></button>
     <button class="nr" data-tab="chores"><span class="ic" style="background:#30d158">🧹</span><span class="lb" data-i18n="chores">Chores</span><span class="bd" id="b-chores"></span></button>
     <button class="nr" data-tab="tasks"><span class="ic" style="background:#0a84ff">📋</span><span class="lb" data-i18n="tasks">Tasks</span><span class="bd" id="b-tasks"></span></button>
@@ -207,7 +271,7 @@ input[type=date].fld,input[type=number].fld{width:auto;margin:0;padding:10px 16p
     <button class="nr" data-tab="timers"><span class="ic" style="background:#ff9f0a">⏱️</span><span class="lb" data-i18n="timers">Timers</span><span class="bd" id="b-timers"></span></button>
     <div class="sp"></div>
     <div class="me">
-      <button class="who press" id="who"><span class="av" id="av">A</span><span class="nm" id="meName">Arik</span></button>
+      <button class="who press" id="who"><span class="av" id="av">A</span></button>
       <button class="circ glass press" id="lang">한</button>
       <button class="circ glass press" id="gear">⚙️</button>
     </div>
@@ -271,14 +335,15 @@ en:{home:'Home',chores:'Chores',tasks:'Tasks',notes:'Notes',photos:'Photos',time
 ko:{home:'홈',chores:'집안일',tasks:'할 일',notes:`쪽지${H('-紙')}`,photos:`사진${H('寫眞')}`,timers:'타이머',newChore:'뭘 해야 해?',newTask:'새 할 일',both:'둘 다',arik:'아릭',shiho:'시호',oneoff:`한 번${H('番')}`,daily:`매일${H('每日')}`,weekly:`매주${H('每週')}`,all:`전체${H('全體')}`,slideshow:'▶ 슬라이드쇼',timerLabel:`이름, 선택${H('選擇')}`,min:`분${H('分')}`,minU:`분${H('分')}`,hr:`1시간${H('時間')}`,start:`시작${H('始作')}`,cancel:`취소${H('取消')}`,add:`추가${H('追加')}`,send:'보내기',timesUp:`⏰ 시간${H('時間')} 됐어!`,dismiss:'끄기',del:`삭제${H('削除')}`,close:'닫기',roastTitle:'잔소리 메시지',roastPh:`메시지 추가${H('追加')}, 영어${H('英語')}`,roastPhKo:`한국어${H('韓國語')}, 선택${H('選擇')}`,done:`완료${H('完了')}`,emptyChores:`할 일이 없다니. 수상${H('殊常')}한데.`,emptyTasks:'할 일 없음. 즐길 수 있을 때 즐겨.',emptyNotes:`아직 쪽지${H('-紙')}가 없어요. 달달하게 한 줄. 아니면 무례${H('無禮')}하게.`,emptyPhotos:`아직 사진${H('寫眞')}이 없어요. 동굴${H('洞窟')}에 영혼${H('靈魂')}을 불어넣어 주세요.`,emptyTimers:`실행${H('實行')} 중${H('中')}인 타이머 없음.`,emptyRoasts:'아직 없음.',nPhotos:n=>`${n}장${H('張')}`,viewing:n=>`${n} 화면${H('畫面')}`,uploading:(i,n)=>`업로드 중${H('中')} ${i}/${n}`,added:n=>`사진${H('寫眞')} ${n}장${H('張')} 추가${H('追加')}됨`,addFirst:`먼저 사진${H('寫眞')}을 추가${H('追加')}하세요`,enterMin:`분${H('分')}을 입력${H('入力')}하세요`,confirmDel:`두 사람 모두에게서 이 사진${H('寫眞')}을 삭제${H('削除')}할까요?`,timer:'타이머',loadErr:`불러오기 오류${H('誤謬')}: `,upFail:`업로드 실패${H('失敗')}: `,initA:'아',initS:'시',locale:'ko-KR',switchU:`탭해서 전환${H('轉換')}`,owner:`담당${H('擔當')}`,repeat:`반복${H('反復')}`,due:`마감${H('磨勘')}`,to:'받는 사람',today:'오늘',tomorrow:`내일${H('來日')}`,weekend:`주말${H('週末')}`,noDate:'날짜 없음',overdue:`기한${H('期限')} 지남`,upcoming:`예정${H('豫定')}`,doneGrp:`완료${H('完了')}됨`,addChore:'새 집안일',addTask:'새 할 일',writeNote:`쪽지${H('-紙')}를 써요…`,newNote:`새 쪽지${H('-紙')}`,customTimer:`타이머 설정${H('設定')}`,newNoteFrom:n=>`💌 ${n}의 새 쪽지${H('-紙')}`,choresLeft:'남은 집안일',noTimers:'타이머 없음',nextTimer:'다음 타이머',dueSoon:`곧 마감${H('磨勘')}`,nothingDue:`마감${H('磨勘')} 없음 🎉`,latestNote:`최근${H('最近')} 쪽지${H('-紙')}`,noNotes:`아직 쪽지${H('-紙')} 없음`,tapAddPhotos:`탭해서 사진${H('寫眞')} 추가${H('追加')}`,newB:'새',from:'보낸 사람'}
 };
 let S={user:localStorage.getItem('cave_user')||'arik',lang:localStorage.getItem('cave_lang')||'en',tab:'home',filter:'all',chores:[],timers:[],photos:[],roasts:[],notes:[]};
-const t=(k,...a)=>{const v=(L[S.lang]||L.en)[k];return typeof v==='function'?v(...a):v};
+const wrapH=r=>typeof r==='string'&&r.includes('class="hj"')?`<span>${r}</span>`:r;
+const t=(k,...a)=>{const v=(L[S.lang]||L.en)[k];return wrapH(typeof v==='function'?v(...a):v)};
 const $=s=>document.querySelector(s);
 const strip=x=>String(x).replace(/<[^>]+>/g,'');
 const tp=(k,...a)=>strip(t(k,...a));
 const hj=s=>s.replace(/\(([\u3400-\u9fff\-]+)\)/g,'<small class="hj">($1)</small>');
-const E=s=>hj(esc(s));
+const E=s=>wrapH(hj(esc(s)));
 const KOH={'일요일':'日曜日','월요일':'月曜日','화요일':'火曜日','수요일':'水曜日','목요일':'木曜日','금요일':'金曜日','토요일':'土曜日','오전':'午前','오후':'午後'};
-const ann=s=>S.lang!=='ko'?esc(s):esc(s).replace(/(일요일|월요일|화요일|수요일|목요일|금요일|토요일|오전|오후)/g,m=>m+H(KOH[m]));
+const ann=s=>S.lang!=='ko'?esc(s):wrapH(esc(s).replace(/(일요일|월요일|화요일|수요일|목요일|금요일|토요일|오전|오후)/g,m=>m+H(KOH[m])));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let last=Date.now(),lbIdx=0,showOn=false,showTimer=null,showIdx=0,showOrder=[],lastRoast='',notesSeen=null;
 const rtext=r=>(S.lang==='ko'&&r.text_ko)?r.text_ko:r.text;
@@ -395,7 +460,7 @@ function renderWidgets(){
   if(!S.photos.length)widgetPhoto=null;
   $('#widgets').innerHTML=`
   <div class="w w-clock glass press" data-go="timers"><div class="wl">🕰️ ${ann(d.toLocaleDateString(loc,{weekday:'long'}))}${dp?' · '+ann(dp):''}</div>
-    <div><div class="tm" id="wTime">${esc(hm)}</div></div>
+    <div><div class="tm" id="wTime" style="font-size:${hm.length>4?84:104}px">${esc(hm)}</div></div>
     <div><div class="dt">${esc(d.toLocaleDateString(loc,{month:'long',day:'numeric'}))}</div><div class="yr">Hongdae Cave</div></div></div>
   <div class="w w-photo glass press" data-go="photos" style="${widgetPhoto?`background-image:url('${photoUrl(widgetPhoto)}')`:''}">
     ${widgetPhoto?`<div class="ov">🖼️ ${t('nPhotos',S.photos.length)}</div>`:`<div style="margin:auto;text-align:center;font-size:19px;font-weight:700;color:var(--mute)">🖼️<br>${t('tapAddPhotos')}</div>`}</div>
@@ -464,7 +529,7 @@ function setTab(tb){
 function setUser(u,quiet){
   S.user=u;localStorage.setItem('cave_user',u);
   const a=$('#av');a.textContent=u==='arik'?t('initA'):t('initS');a.classList.toggle('shiho',u==='shiho');
-  $('#meName').innerHTML=t(u);
+  
   if(!quiet)toast(t('viewing',t(u)));
 }
 document.querySelectorAll('.nr').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
@@ -642,7 +707,7 @@ let lastMin=-1;
 function tick(){
   const d=new Date(),loc=t('locale');
   const time=d.toLocaleTimeString(loc,{hour:'numeric',minute:'2-digit'});
-  $('#sideTime').textContent=time+' · '+d.toLocaleDateString(loc,{month:'short',day:'numeric'});
+  $('#sideTime').textContent=time+' · '+d.toLocaleDateString(loc,{month:'numeric',day:'numeric'});
   $('#showClock').textContent=time;
   if(d.getMinutes()!==lastMin){lastMin=d.getMinutes();renderWidgets()}
   document.querySelectorAll('[data-end]').forEach(el=>el.textContent=fmt(new Date(el.dataset.end)-Date.now()));
