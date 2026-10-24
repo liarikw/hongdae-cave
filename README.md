@@ -1,2 +1,5 @@
 # hongdae-cave
-Why get an Apple HomeView when I can repurpose an old phone?
+
+Shared wall-display app (chores, photos, timers). Static site on Vercel, data on Supabase.
+
+Live: https://hongdae-cave-project-floww.vercel.app
