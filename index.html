@@ -246,6 +246,43 @@ input[type=date].fld,input[type=number].fld{font-size:22px;padding:12px 18px}
 #s-chores .hd .sp{display:none}#cFilter{gap:6px!important}#cFilter .pill{font-size:19px;padding:10px 14px}
 .nr{min-height:42px}.brand{padding:0 10px 4px}aside{padding-bottom:6px}
 
+/* ---- v5 Home-style top bar, summary pills, square clocks ---- */
+.top{flex:none;display:flex;align-items:center;gap:12px;min-height:56px}
+.top .sp{flex:1}
+#pageTitle{margin:0 0 0 6px;font-size:38px;font-weight:800;letter-spacing:-.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.capsule{display:flex;gap:2px;padding:4px;border-radius:999px;flex:none}
+.cbtn{width:54px;height:54px;border-radius:50%;border:0;background:transparent;font-size:23px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0;color:#fff}
+#ctxAdd{font-size:36px;font-weight:500;padding-bottom:3px}
+main{gap:8px}
+#roastBar{min-height:64px;padding:8px 24px}
+#roast{font-size:28px}
+.me{justify-content:flex-start;padding:6px 4px 0}
+.who{flex:1;gap:12px;padding:0}
+.who .nm{font-size:21px;font-weight:800}
+.sum{display:flex;gap:10px;overflow-x:auto;margin-bottom:12px;padding:2px 2px 4px}
+.sum::-webkit-scrollbar{display:none}
+.sp2{flex:none;display:flex;align-items:center;gap:10px;border-radius:999px;padding:7px 20px 7px 8px;color:#fff;text-align:left}
+.sp2 .si{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.sp2 .stx{display:flex;flex-direction:column}
+.sp2 .st{font-size:18px;font-weight:800;line-height:1.1;white-space:nowrap}
+.sp2 .ss{font-size:16px;color:var(--mute);font-weight:600;line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sp2.alert .ss{color:#ff9a9e}
+.wg{grid-template-columns:162px 162px 1fr;grid-auto-rows:162px}
+#roast{text-wrap:balance}
+html{word-break:keep-all}
+.w-clock .ap{font-size:16px;margin-left:3px}
+.w-clock .ap2{font-size:18px;font-weight:700;color:var(--mute);margin-top:2px}
+.w-clock{padding:14px 16px}.w-clock .dt{font-size:19px}.w-analog{padding:10px}
+.sp2{padding:6px 18px 6px 7px}.sum{margin-bottom:10px}
+.w-clock{grid-column:auto;grid-row:auto;padding:16px 18px;justify-content:space-between}
+.w-clock .tm{letter-spacing:-2px;white-space:nowrap;line-height:1}
+.w-clock .ap{font-size:18px;letter-spacing:0;margin-left:4px;color:var(--mute);font-weight:700}
+.w-clock .dt{font-size:20px;font-weight:700}
+.w-analog{padding:12px;align-items:center;justify-content:center}
+.w-analog svg{width:100%;height:100%;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+.w-photo{grid-column:auto}
+.wg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;grid-auto-rows:minmax(150px,auto)}
+
 @media (orientation:portrait){
  #app{flex-direction:column-reverse;padding-left:12px;padding-right:12px}
  aside{width:auto;flex-direction:row;padding:6px;border-radius:999px;overflow-x:auto}
@@ -270,43 +307,34 @@ input[type=date].fld,input[type=number].fld{font-size:22px;padding:12px 18px}
     <button class="nr" data-tab="photos"><span class="ic" style="background:#bf5af2">🖼️</span><span class="lb" data-i18n="photos">Photos</span><span class="bd" id="b-photos"></span></button>
     <button class="nr" data-tab="timers"><span class="ic" style="background:#ff9f0a">⏱️</span><span class="lb" data-i18n="timers">Timers</span><span class="bd" id="b-timers"></span></button>
     <div class="sp"></div>
-    <div class="me">
-      <button class="who press" id="who"><span class="av" id="av">A</span></button>
-      <button class="circ glass press" id="lang">한</button>
-      <button class="circ glass press" id="gear">⚙️</button>
-    </div>
+    <div class="me"><button class="who press" id="who"><span class="av" id="av">李</span><span class="nm" id="meName"></span></button></div>
   </aside>
 
   <main>
+    <header class="top">
+      <h1 id="pageTitle">Hongdae Cave</h1>
+      <div class="sp"></div>
+      <div class="capsule glass blur">
+        <button class="cbtn press" id="ctxAdd">+</button>
+        <button class="cbtn press" id="lang">한</button>
+        <button class="cbtn press" id="gear">⚙️</button>
+      </div>
+    </header>
     <div id="roastBar" class="glass blur"><div id="roast"></div></div>
 
-    <section id="s-home" class="on"><div class="wg" id="widgets"></div></section>
-
-    <section id="s-chores">
-      <div class="hd"><h2 data-i18n="chores">Chores</h2><div class="pills" id="cFilter" style="display:flex;gap:8px"></div><div class="sp"></div><button class="plus press" data-add="chore">+</button></div>
-      <div class="tiles" id="cList"></div>
+    <section id="s-home" class="on">
+      <div class="sum" id="summary"></div>
+      <div class="wg" id="widgets"></div>
+      <div class="wg2" id="widgets2"></div>
     </section>
-
-    <section id="s-tasks">
-      <div class="hd"><h2 data-i18n="tasks">Tasks</h2><div class="sp"></div><button class="plus press" data-add="task">+</button></div>
-      <div id="tkList"></div>
-    </section>
-
-    <section id="s-notes">
-      <div class="hd"><h2 data-i18n="notes">Notes</h2><div class="sp"></div><button class="plus press" data-add="note">+</button></div>
-      <div class="notes" id="nList"></div>
-    </section>
-
+    <section id="s-chores"><div class="pills" id="cFilter" style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto"></div><div class="tiles" id="cList"></div></section>
+    <section id="s-tasks"><div id="tkList"></div></section>
+    <section id="s-notes"><div class="notes" id="nList"></div></section>
     <section id="s-photos">
-      <div class="hd"><h2 data-i18n="photos">Photos</h2><span class="pill glass" id="pCount" style="display:none"></span><div class="sp"></div><button class="cap glass press" id="showBtn" data-i18n="slideshow">▶ Slideshow</button><label class="plus press" for="upl">+</label><input id="upl" type="file" accept="image/*" multiple hidden></div>
+      <div class="hd"><span class="pill glass" id="pCount" style="display:none"></span><button class="cap glass press" id="showBtn" data-i18n="slideshow">▶ Slideshow</button><input id="upl" type="file" accept="image/*" multiple hidden></div>
       <div class="photos" id="pGrid"></div>
     </section>
-
-    <section id="s-timers">
-      <div class="hd"><h2 data-i18n="timers">Timers</h2><div class="sp"></div><button class="plus press" data-add="timer">+</button></div>
-      <div class="pre" id="tPre"></div>
-      <div id="tList"></div>
-    </section>
+    <section id="s-timers"><div class="pre" id="tPre"></div><div id="tList"></div></section>
   </main>
 </div>
 
@@ -331,8 +359,8 @@ const sb=supabase.createClient(SB_URL,SB_KEY);
 /* ---------- i18n ---------- */
 const H=x=>`<small class="hj">(${x})</small>`;
 const L={
-en:{home:'Home',chores:'Chores',tasks:'Tasks',notes:'Notes',photos:'Photos',timers:'Timers',newChore:'What needs doing?',newTask:'New task',both:'Both',arik:'Arik',shiho:'Shi Ho',oneoff:'One-off',daily:'Daily',weekly:'Weekly',all:'All',slideshow:'▶ Slideshow',timerLabel:'Label (optional)',min:'Minutes',minU:' min',hr:'1 hr',start:'Start',cancel:'Cancel',add:'Add',send:'Send',timesUp:"⏰ TIME'S UP",dismiss:'Dismiss',del:'Delete',close:'Close',roastTitle:'Roast messages',roastPh:'Add a message (English)',roastPhKo:'Korean (optional)',done:'Done',emptyChores:'Nothing to do. Suspicious.',emptyTasks:'No tasks. Enjoy it while it lasts.',emptyNotes:'No notes yet. Leave something sweet. Or rude.',emptyPhotos:'No photos yet. Add some so the cave has a soul.',emptyTimers:'No timers running.',emptyRoasts:'None yet.',nPhotos:n=>n+' photos',viewing:n=>'Viewing as '+n,uploading:(i,n)=>`Uploading ${i} of ${n}`,added:n=>`Added ${n} photo${n>1?'s':''}`,addFirst:'Add photos first',enterMin:'Enter minutes',confirmDel:'Delete this photo for both of you?',timer:'Timer',loadErr:'Load error: ',upFail:'Upload failed: ',initA:'A',initS:'S',locale:'en-US',switchU:'Tap to switch',owner:'Who',repeat:'Repeat',due:'Due',to:'To',today:'Today',tomorrow:'Tomorrow',weekend:'Weekend',noDate:'No date',overdue:'Overdue',upcoming:'Upcoming',doneGrp:'Done',addChore:'New chore',addTask:'New task',writeNote:'Write a note…',newNote:'New note',customTimer:'Custom timer',newNoteFrom:n=>'💌 New note from '+n,choresLeft:'chores left',noTimers:'No timers',nextTimer:'Next timer',dueSoon:'Due soon',nothingDue:'Nothing due 🎉',latestNote:'Latest note',noNotes:'No notes yet',tapAddPhotos:'Tap to add photos',newB:'NEW',from:'from'},
-ko:{home:'홈',chores:'집안일',tasks:'할 일',notes:`쪽지${H('-紙')}`,photos:`사진${H('寫眞')}`,timers:'타이머',newChore:'뭘 해야 해?',newTask:'새 할 일',both:'둘 다',arik:'아릭',shiho:'시호',oneoff:`한 번${H('番')}`,daily:`매일${H('每日')}`,weekly:`매주${H('每週')}`,all:`전체${H('全體')}`,slideshow:'▶ 슬라이드쇼',timerLabel:`이름, 선택${H('選擇')}`,min:`분${H('分')}`,minU:`분${H('分')}`,hr:`1시간${H('時間')}`,start:`시작${H('始作')}`,cancel:`취소${H('取消')}`,add:`추가${H('追加')}`,send:'보내기',timesUp:`⏰ 시간${H('時間')} 됐어!`,dismiss:'끄기',del:`삭제${H('削除')}`,close:'닫기',roastTitle:'잔소리 메시지',roastPh:`메시지 추가${H('追加')}, 영어${H('英語')}`,roastPhKo:`한국어${H('韓國語')}, 선택${H('選擇')}`,done:`완료${H('完了')}`,emptyChores:`할 일이 없다니. 수상${H('殊常')}한데.`,emptyTasks:'할 일 없음. 즐길 수 있을 때 즐겨.',emptyNotes:`아직 쪽지${H('-紙')}가 없어요. 달달하게 한 줄. 아니면 무례${H('無禮')}하게.`,emptyPhotos:`아직 사진${H('寫眞')}이 없어요. 동굴${H('洞窟')}에 영혼${H('靈魂')}을 불어넣어 주세요.`,emptyTimers:`실행${H('實行')} 중${H('中')}인 타이머 없음.`,emptyRoasts:'아직 없음.',nPhotos:n=>`${n}장${H('張')}`,viewing:n=>`${n} 화면${H('畫面')}`,uploading:(i,n)=>`업로드 중${H('中')} ${i}/${n}`,added:n=>`사진${H('寫眞')} ${n}장${H('張')} 추가${H('追加')}됨`,addFirst:`먼저 사진${H('寫眞')}을 추가${H('追加')}하세요`,enterMin:`분${H('分')}을 입력${H('入力')}하세요`,confirmDel:`두 사람 모두에게서 이 사진${H('寫眞')}을 삭제${H('削除')}할까요?`,timer:'타이머',loadErr:`불러오기 오류${H('誤謬')}: `,upFail:`업로드 실패${H('失敗')}: `,initA:'아',initS:'시',locale:'ko-KR',switchU:`탭해서 전환${H('轉換')}`,owner:`담당${H('擔當')}`,repeat:`반복${H('反復')}`,due:`마감${H('磨勘')}`,to:'받는 사람',today:'오늘',tomorrow:`내일${H('來日')}`,weekend:`주말${H('週末')}`,noDate:'날짜 없음',overdue:`기한${H('期限')} 지남`,upcoming:`예정${H('豫定')}`,doneGrp:`완료${H('完了')}됨`,addChore:'새 집안일',addTask:'새 할 일',writeNote:`쪽지${H('-紙')}를 써요…`,newNote:`새 쪽지${H('-紙')}`,customTimer:`타이머 설정${H('設定')}`,newNoteFrom:n=>`💌 ${n}의 새 쪽지${H('-紙')}`,choresLeft:'남은 집안일',noTimers:'타이머 없음',nextTimer:'다음 타이머',dueSoon:`곧 마감${H('磨勘')}`,nothingDue:`마감${H('磨勘')} 없음 🎉`,latestNote:`최근${H('最近')} 쪽지${H('-紙')}`,noNotes:`아직 쪽지${H('-紙')} 없음`,tapAddPhotos:`탭해서 사진${H('寫眞')} 추가${H('追加')}`,newB:'새',from:'보낸 사람'}
+en:{home:'Home',chores:'Chores',tasks:'Tasks',notes:'Notes',photos:'Photos',timers:'Timers',newChore:'What needs doing?',newTask:'New task',both:'Both',arik:'Arik',shiho:'Shi Ho',oneoff:'One-off',daily:'Daily',weekly:'Weekly',all:'All',slideshow:'▶ Slideshow',timerLabel:'Label (optional)',min:'Minutes',minU:' min',hr:'1 hr',start:'Start',cancel:'Cancel',add:'Add',send:'Send',timesUp:"⏰ TIME'S UP",dismiss:'Dismiss',del:'Delete',close:'Close',roastTitle:'Roast messages',roastPh:'Add a message (English)',roastPhKo:'Korean (optional)',done:'Done',emptyChores:'Nothing to do. Suspicious.',emptyTasks:'No tasks. Enjoy it while it lasts.',emptyNotes:'No notes yet. Leave something sweet. Or rude.',emptyPhotos:'No photos yet. Add some so the cave has a soul.',emptyTimers:'No timers running.',emptyRoasts:'None yet.',nPhotos:n=>n+' photos',viewing:n=>'Viewing as '+n,uploading:(i,n)=>`Uploading ${i} of ${n}`,added:n=>`Added ${n} photo${n>1?'s':''}`,addFirst:'Add photos first',enterMin:'Enter minutes',confirmDel:'Delete this photo for both of you?',timer:'Timer',loadErr:'Load error: ',upFail:'Upload failed: ',initA:'李',initS:'金',locale:'en-US',caveName:'Hongdae Cave',left:n=>n+' left',overdueN:n=>n+' overdue',dueTodayN:n=>n+' due today',openN:n=>n+' open',allClear:'All clear',newN:n=>n+' new',allRead:'All read',none:'None',caveTag:'CAVE',switchU:'Tap to switch',owner:'Who',repeat:'Repeat',due:'Due',to:'To',today:'Today',tomorrow:'Tomorrow',weekend:'Weekend',noDate:'No date',overdue:'Overdue',upcoming:'Upcoming',doneGrp:'Done',addChore:'New chore',addTask:'New task',writeNote:'Write a note…',newNote:'New note',customTimer:'Custom timer',newNoteFrom:n=>'💌 New note from '+n,choresLeft:'chores left',noTimers:'No timers',nextTimer:'Next timer',dueSoon:'Due soon',nothingDue:'Nothing due 🎉',latestNote:'Latest note',noNotes:'No notes yet',tapAddPhotos:'Tap to add photos',newB:'NEW',from:'from'},
+ko:{home:'홈',chores:'집안일',tasks:'할 일',notes:`쪽지${H('-紙')}`,photos:`사진${H('寫眞')}`,timers:'타이머',newChore:'뭘 해야 해?',newTask:'새 할 일',both:'둘 다',arik:'아릭',shiho:'시호',oneoff:`한 번${H('番')}`,daily:`매일${H('每日')}`,weekly:`매주${H('每週')}`,all:`전체${H('全體')}`,slideshow:'▶ 슬라이드쇼',timerLabel:`이름, 선택${H('選擇')}`,min:`분${H('分')}`,minU:`분${H('分')}`,hr:`1시간${H('時間')}`,start:`시작${H('始作')}`,cancel:`취소${H('取消')}`,add:`추가${H('追加')}`,send:'보내기',timesUp:`⏰ 시간${H('時間')} 됐어!`,dismiss:'끄기',del:`삭제${H('削除')}`,close:'닫기',roastTitle:'잔소리 메시지',roastPh:`메시지 추가${H('追加')}, 영어${H('英語')}`,roastPhKo:`한국어${H('韓國語')}, 선택${H('選擇')}`,done:`완료${H('完了')}`,emptyChores:`할 일이 없다니. 수상${H('殊常')}한데.`,emptyTasks:'할 일 없음. 즐길 수 있을 때 즐겨.',emptyNotes:`아직 쪽지${H('-紙')}가 없어요. 달달하게 한 줄. 아니면 무례${H('無禮')}하게.`,emptyPhotos:`아직 사진${H('寫眞')}이 없어요. 동굴${H('洞窟')}에 영혼${H('靈魂')}을 불어넣어 주세요.`,emptyTimers:`실행${H('實行')} 중${H('中')}인 타이머 없음.`,emptyRoasts:'아직 없음.',nPhotos:n=>`${n}장${H('張')}`,viewing:n=>`${n} 화면${H('畫面')}`,uploading:(i,n)=>`업로드 중${H('中')} ${i}/${n}`,added:n=>`사진${H('寫眞')} ${n}장${H('張')} 추가${H('追加')}됨`,addFirst:`먼저 사진${H('寫眞')}을 추가${H('追加')}하세요`,enterMin:`분${H('分')}을 입력${H('入力')}하세요`,confirmDel:`두 사람 모두에게서 이 사진${H('寫眞')}을 삭제${H('削除')}할까요?`,timer:'타이머',loadErr:`불러오기 오류${H('誤謬')}: `,upFail:`업로드 실패${H('失敗')}: `,initA:'李',initS:'金',locale:'ko-KR',caveName:`홍대${H('弘大')} 동굴${H('洞窟')}`,left:n=>`${n}개${H('個')} 남음`,overdueN:n=>`${n}개${H('個')} 기한${H('期限')} 지남`,dueTodayN:n=>`오늘 ${n}개${H('個')}`,openN:n=>`${n}개${H('個')}`,allClear:'다 했어',newN:n=>`새 쪽지${H('-紙')} ${n}`,allRead:'다 읽음',none:'없음',caveTag:'동굴',switchU:`탭해서 전환${H('轉換')}`,owner:`담당${H('擔當')}`,repeat:`반복${H('反復')}`,due:`마감${H('磨勘')}`,to:'받는 사람',today:'오늘',tomorrow:`내일${H('來日')}`,weekend:`주말${H('週末')}`,noDate:'날짜 없음',overdue:`기한${H('期限')} 지남`,upcoming:`예정${H('豫定')}`,doneGrp:`완료${H('完了')}됨`,addChore:'새 집안일',addTask:'새 할 일',writeNote:`쪽지${H('-紙')}를 써요…`,newNote:`새 쪽지${H('-紙')}`,customTimer:`타이머 설정${H('設定')}`,newNoteFrom:n=>`💌 ${n}의 새 쪽지${H('-紙')}`,choresLeft:'남은 집안일',noTimers:'타이머 없음',nextTimer:'다음 타이머',dueSoon:`곧 마감${H('磨勘')}`,nothingDue:`마감${H('磨勘')} 없음 🎉`,latestNote:`최근${H('最近')} 쪽지${H('-紙')}`,noNotes:`아직 쪽지${H('-紙')} 없음`,tapAddPhotos:`탭해서 사진${H('寫眞')} 추가${H('追加')}`,newB:'새',from:'보낸 사람'}
 };
 let S={user:localStorage.getItem('cave_user')||'arik',lang:localStorage.getItem('cave_lang')||'en',tab:'home',filter:'all',chores:[],timers:[],photos:[],roasts:[],notes:[]};
 const wrapH=r=>typeof r==='string'&&r.includes('class="hj"')?`<span>${r}</span>`:r;
@@ -381,7 +409,7 @@ function applyLang(){
   $('#lang').textContent=S.lang==='en'?'한':'EN';
   $('#tPre').innerHTML=[1,5,10,15,20,30,45,60].map(m=>`<button class="cap glass press" data-m="${m}">${m>=60?t('hr'):m+t('minU')}</button>`).join('');
   document.querySelector('.seg[data-name=rTarget]').innerHTML=segBtns([['both',t('both')],['arik',t('arik')],['shiho',t('shiho')]],'both');
-  setUser(S.user,true);
+  setUser(S.user,true);setTitle();
   renderAll();
 }
 
@@ -447,27 +475,46 @@ function renderBadges(){
   bd('timers',S.timers.length,S.timers.length>0);
 }
 let widgetPhoto=null;
+function analogSVG(){
+  let n='';for(let i=1;i<=12;i++){const a=i*Math.PI/6;n+=`<text x="${(50+37.5*Math.sin(a)).toFixed(1)}" y="${(50-37.5*Math.cos(a)+4).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1c1c1e" font-family="-apple-system,Helvetica,sans-serif">${i}</text>`}
+  let tk='';for(let i=0;i<60;i++){if(i%5===0)continue;const a=i*Math.PI/30;tk+=`<line x1="${(50+46*Math.sin(a)).toFixed(2)}" y1="${(50-46*Math.cos(a)).toFixed(2)}" x2="${(50+44*Math.sin(a)).toFixed(2)}" y2="${(50-44*Math.cos(a)).toFixed(2)}" stroke="#c7c7cc" stroke-width=".6"/>`}
+  return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" fill="#fff"/>${tk}${n}<text x="50" y="69" text-anchor="middle" font-size="7.5" font-weight="700" fill="#8e8e93" font-family="-apple-system,Helvetica,sans-serif">${t('caveTag')}</text><line id="aH" x1="50" y1="53" x2="50" y2="28" stroke="#1c1c1e" stroke-width="4.2" stroke-linecap="round"/><line id="aM" x1="50" y1="54" x2="50" y2="13" stroke="#1c1c1e" stroke-width="2.8" stroke-linecap="round"/><line id="aS" x1="50" y1="61" x2="50" y2="10" stroke="#ff9500" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="50" r="2.6" fill="#ff9500"/><circle cx="50" cy="50" r="1" fill="#fff"/></svg>`;
+}
+function updAnalog(d){
+  const h=$('#aH');if(!h)return;
+  const sc=d.getSeconds(),mn=d.getMinutes()+sc/60,hr=(d.getHours()%12)+mn/60;
+  h.setAttribute('transform',`rotate(${hr*30} 50 50)`);$('#aM').setAttribute('transform',`rotate(${mn*6} 50 50)`);$('#aS').setAttribute('transform',`rotate(${sc*6} 50 50)`);
+}
 function renderWidgets(){
   const loc=t('locale'),d=new Date();
   const parts=new Intl.DateTimeFormat(loc,{hour:'numeric',minute:'2-digit'}).formatToParts(d);
   const hm=parts.filter(p=>p.type!=='dayPeriod').map(p=>p.value).join('').trim(),dp=(parts.find(p=>p.type==='dayPeriod')||{}).value||'';
-  const open=chores().filter(c=>!c.done);
-  const ca=open.filter(c=>c.owner!=='shiho').length,cs=open.filter(c=>c.owner!=='arik').length;
-  const nt=S.timers[0];
-  const due=tasks().filter(x=>!x.done).sort((a,b)=>(a.due_date||'9999').localeCompare(b.due_date||'9999')).slice(0,3);
-  const note=S.notes.find(forMe)||S.notes[0];
+  const open=chores().filter(c=>!c.done),ot=tasks().filter(x=>!x.done),td=ymd(d);
+  const over=ot.filter(x=>x.due_date&&x.due_date<td).length,tod=ot.filter(x=>x.due_date===td).length;
+  const un=unreadNotes().length,nt=S.timers[0];
+  const P=(go,ic,bg,title,sub,alert)=>`<button class="sp2 glass blur press ${alert?'alert':''}" data-go="${go}"><span class="si" style="background:${bg}">${ic}</span><span class="stx"><span class="st">${title}</span><span class="ss">${sub}</span></span></button>`;
+  $('#summary').innerHTML=
+    P('chores','🧹','#30d158',t('chores'),open.length?t('left',open.length):t('allClear'))+
+    P('tasks','📋','#0a84ff',t('tasks'),over?t('overdueN',over):tod?t('dueTodayN',tod):ot.length?t('openN',ot.length):t('allClear'),over>0)+
+    P('notes','💌','#ff375f',t('notes'),un?t('newN',un):t('allRead'),un>0)+
+    P('timers','⏱️','#ff9f0a',t('timers'),nt?`${esc(nt.label)} <span data-end="${nt.ends_at}">${fmt(new Date(nt.ends_at)-Date.now())}</span>`:t('none'))+
+    P('photos','🖼️','#bf5af2',t('photos'),t('nPhotos',S.photos.length));
   if(S.photos.length&&(!widgetPhoto||!S.photos.find(p=>p.id===widgetPhoto.id)))widgetPhoto=S.photos[Math.floor(Math.random()*S.photos.length)];
   if(!S.photos.length)widgetPhoto=null;
   $('#widgets').innerHTML=`
-  <div class="w w-clock glass press" data-go="timers"><div class="wl">🕰️ ${ann(d.toLocaleDateString(loc,{weekday:'long'}))}${dp?' · '+ann(dp):''}</div>
-    <div><div class="tm" id="wTime" style="font-size:${hm.length>4?84:104}px">${esc(hm)}</div></div>
-    <div><div class="dt">${esc(d.toLocaleDateString(loc,{month:'long',day:'numeric'}))}</div><div class="yr">Hongdae Cave</div></div></div>
+  <div class="w w-clock glass">
+    <div class="wl">${ann(d.toLocaleDateString(loc,{weekday:'long'}))}</div>
+    <div><div class="tm" style="font-size:${hm.length>4?42:52}px">${esc(hm)}${dp&&S.lang!=='ko'?`<span class="ap">${ann(dp)}</span>`:''}</div>${dp&&S.lang==='ko'?`<div class="ap2">${ann(dp)}</div>`:''}</div>
+    <div class="dt">${esc(d.toLocaleDateString(loc,{month:'long',day:'numeric'}))}</div></div>
+  <div class="w w-analog glass">${analogSVG()}</div>
   <div class="w w-photo glass press" data-go="photos" style="${widgetPhoto?`background-image:url('${photoUrl(widgetPhoto)}')`:''}">
-    ${widgetPhoto?`<div class="ov">🖼️ ${t('nPhotos',S.photos.length)}</div>`:`<div style="margin:auto;text-align:center;font-size:19px;font-weight:700;color:var(--mute)">🖼️<br>${t('tapAddPhotos')}</div>`}</div>
-  <div class="w glass press" data-go="chores"><div class="wl">🧹 ${t('chores')}</div><div class="big">${open.length}</div><div class="s"><i class="dot" style="background:var(--arik)"></i> ${ca} · <i class="dot" style="background:var(--shiho)"></i> ${cs}</div></div>
-  <div class="w glass press" data-go="timers"><div class="wl">⏱️ ${nt?esc(nt.label):t('timers')}</div>${nt?`<div class="big" style="font-size:44px" data-end="${nt.ends_at}">${fmt(new Date(nt.ends_at)-Date.now())}</div><div class="prog" data-start="${nt.created_at}" data-endp="${nt.ends_at}" style="width:${pct(nt)}%"></div>`:`<div class="s" style="margin-top:auto;font-size:18px">${t('noTimers')}</div>`}</div>
-  <div class="w w-wide glass press" data-go="tasks"><div class="wl">📋 ${t('dueSoon')}</div>${due.length?`<ul class="wl2">${due.map(x=>{const di=dueInfo(x.due_date);return`<li><span>${E(x.title)}</span><span class="due ${di.cls}" style="font-size:15px">${di.txt}</span></li>`}).join('')}</ul>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('nothingDue')}</div>`}</div>
-  <div class="w w-wide glass press" data-go="notes"><div class="wl">💌 ${t('latestNote')} ${note&&!note.read&&forMe(note)?`<span class="newb">${t('newB')}</span>`:''}</div>${note?`<div class="note-txt">${E(note.text)}</div><div class="s" style="margin-top:auto">${t(note.from_user)} → ${t(note.to_user)} · ${ago(note.created_at)}</div>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('noNotes')}</div>`}</div>`;
+    ${widgetPhoto?`<div class="ov">🖼️ ${t('nPhotos',S.photos.length)}</div>`:`<div style="margin:auto;text-align:center;font-size:18px;font-weight:700;color:var(--mute);padding:10px">🖼️<br>${t('tapAddPhotos')}</div>`}</div>`;
+  const due=ot.slice().sort((a,b)=>(a.due_date||'9999').localeCompare(b.due_date||'9999')).slice(0,3);
+  const note=S.notes.find(forMe)||S.notes[0];
+  $('#widgets2').innerHTML=`
+  <div class="w glass press" data-go="tasks"><div class="wl">📋 ${t('dueSoon')}</div>${due.length?`<ul class="wl2">${due.map(x=>{const di=dueInfo(x.due_date);return`<li><span>${E(x.title)}</span><span class="due ${di.cls}" style="font-size:15px">${di.txt}</span></li>`}).join('')}</ul>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('nothingDue')}</div>`}</div>
+  <div class="w glass press" data-go="notes"><div class="wl">💌 ${t('latestNote')} ${note&&!note.read&&forMe(note)?`<span class="newb">${t('newB')}</span>`:''}</div>${note?`<div class="note-txt">${E(note.text)}</div><div class="s" style="margin-top:auto">${t(note.from_user)} → ${t(note.to_user)} · ${ago(note.created_at)}</div>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('noNotes')}</div>`}</div>`;
+  updAnalog(d);
 }
 function renderChores(){
   const f=S.filter,all=chores(),open=all.filter(c=>!c.done);
@@ -520,20 +567,22 @@ function rotateRoast(){
 }
 
 /* ---------- nav / user / lang ---------- */
+function setTitle(){$('#pageTitle').innerHTML=S.tab==='home'?t('caveName'):t(S.tab);$('#ctxAdd').style.display=S.tab==='home'?'none':''}
 function setTab(tb){
-  S.tab=tb;
+  S.tab=tb;setTitle();
   document.querySelectorAll('.nr').forEach(b=>b.classList.toggle('on',b.dataset.tab===tb));
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='s-'+tb));
   if(tb==='notes')markRead();
 }
 function setUser(u,quiet){
   S.user=u;localStorage.setItem('cave_user',u);
-  const a=$('#av');a.textContent=u==='arik'?t('initA'):t('initS');a.classList.toggle('shiho',u==='shiho');
+  const a=$('#av');a.textContent=u==='arik'?t('initA'):t('initS');a.classList.toggle('shiho',u==='shiho');$('#meName').innerHTML=t(u);
   
   if(!quiet)toast(t('viewing',t(u)));
 }
 document.querySelectorAll('.nr').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
-$('#widgets').onclick=e=>{const w=e.target.closest('[data-go]');if(w)setTab(w.dataset.go)};
+$('#s-home').onclick=e=>{const w=e.target.closest('[data-go]');if(w)setTab(w.dataset.go)};
+$('#ctxAdd').onclick=()=>{if(S.tab==='photos')return $('#upl').click();const k={chores:'chore',tasks:'task',notes:'note',timers:'timer'}[S.tab];if(k)openAdd(k)};
 $('#who').onclick=()=>{setUser(S.user==='arik'?'shiho':'arik');rotateRoast();renderAll();if(S.tab==='notes')markRead()};
 $('#lang').onclick=()=>{S.lang=S.lang==='en'?'ko':'en';localStorage.setItem('cave_lang',S.lang);applyLang();rotateRoast();tick()};
 
@@ -710,6 +759,7 @@ function tick(){
   $('#sideTime').textContent=time+' · '+d.toLocaleDateString(loc,{month:'numeric',day:'numeric'});
   $('#showClock').textContent=time;
   if(d.getMinutes()!==lastMin){lastMin=d.getMinutes();renderWidgets()}
+  updAnalog(d);
   document.querySelectorAll('[data-end]').forEach(el=>el.textContent=fmt(new Date(el.dataset.end)-Date.now()));
   document.querySelectorAll('.prog').forEach(el=>el.style.width=pct({created_at:el.dataset.start,ends_at:el.dataset.endp})+'%');
   checkAlarm();
