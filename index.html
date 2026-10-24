@@ -283,6 +283,19 @@ html{word-break:keep-all}
 .w-photo{grid-column:auto}
 .wg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;grid-auto-rows:minmax(150px,auto)}
 
+/* v6 bigger clocks */
+.wg{grid-template-columns:1fr 1fr;grid-auto-rows:244px;margin-bottom:12px}
+.w-clock{padding:18px 22px}
+.w-clock .wl{font-size:20px}
+.w-clock .tm{letter-spacing:-3px}
+.w-clock .ap{font-size:24px;margin-left:5px}
+.w-clock .ap2{font-size:22px}
+.w-clock .dt{font-size:26px}
+.w-analog{padding:12px}
+.wg2{grid-template-columns:1fr 1fr 1fr;grid-auto-rows:170px}
+.wg2 .w-photo{grid-column:1;grid-row:span 2}
+.wg2 .w:not(.w-photo){grid-column:span 2}
+
 @media (orientation:portrait){
  #app{flex-direction:column-reverse;padding-left:12px;padding-right:12px}
  aside{width:auto;flex-direction:row;padding:6px;border-radius:999px;overflow-x:auto}
@@ -323,8 +336,8 @@ html{word-break:keep-all}
     <div id="roastBar" class="glass blur"><div id="roast"></div></div>
 
     <section id="s-home" class="on">
-      <div class="sum" id="summary"></div>
       <div class="wg" id="widgets"></div>
+      <div class="sum" id="summary" hidden style="display:none"></div>
       <div class="wg2" id="widgets2"></div>
     </section>
     <section id="s-chores"><div class="pills" id="cFilter" style="display:flex;gap:8px;margin-bottom:12px;overflow-x:auto"></div><div class="tiles" id="cList"></div></section>
@@ -504,14 +517,14 @@ function renderWidgets(){
   $('#widgets').innerHTML=`
   <div class="w w-clock glass">
     <div class="wl">${ann(d.toLocaleDateString(loc,{weekday:'long'}))}</div>
-    <div><div class="tm" style="font-size:${hm.length>4?42:52}px">${esc(hm)}${dp&&S.lang!=='ko'?`<span class="ap">${ann(dp)}</span>`:''}</div>${dp&&S.lang==='ko'?`<div class="ap2">${ann(dp)}</div>`:''}</div>
+    <div><div class="tm" style="font-size:${hm.length>4?76:92}px">${esc(hm)}${dp&&S.lang!=='ko'?`<span class="ap">${ann(dp)}</span>`:''}</div>${dp&&S.lang==='ko'?`<div class="ap2">${ann(dp)}</div>`:''}</div>
     <div class="dt">${esc(d.toLocaleDateString(loc,{month:'long',day:'numeric'}))}</div></div>
-  <div class="w w-analog glass">${analogSVG()}</div>
-  <div class="w w-photo glass press" data-go="photos" style="${widgetPhoto?`background-image:url('${photoUrl(widgetPhoto)}')`:''}">
-    ${widgetPhoto?`<div class="ov">🖼️ ${t('nPhotos',S.photos.length)}</div>`:`<div style="margin:auto;text-align:center;font-size:18px;font-weight:700;color:var(--mute);padding:10px">🖼️<br>${t('tapAddPhotos')}</div>`}</div>`;
+  <div class="w w-analog glass">${analogSVG()}</div>`;
   const due=ot.slice().sort((a,b)=>(a.due_date||'9999').localeCompare(b.due_date||'9999')).slice(0,3);
   const note=S.notes.find(forMe)||S.notes[0];
   $('#widgets2').innerHTML=`
+  <div class="w w-photo glass press" data-go="photos" style="${widgetPhoto?`background-image:url('${photoUrl(widgetPhoto)}')`:''}">
+    ${widgetPhoto?`<div class="ov">🖼️ ${t('nPhotos',S.photos.length)}</div>`:`<div style="margin:auto;text-align:center;font-size:18px;font-weight:700;color:var(--mute);padding:10px">🖼️<br>${t('tapAddPhotos')}</div>`}</div>
   <div class="w glass press" data-go="tasks"><div class="wl">📋 ${t('dueSoon')}</div>${due.length?`<ul class="wl2">${due.map(x=>{const di=dueInfo(x.due_date);return`<li><span>${E(x.title)}</span><span class="due ${di.cls}" style="font-size:15px">${di.txt}</span></li>`}).join('')}</ul>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('nothingDue')}</div>`}</div>
   <div class="w glass press" data-go="notes"><div class="wl">💌 ${t('latestNote')} ${note&&!note.read&&forMe(note)?`<span class="newb">${t('newB')}</span>`:''}</div>${note?`<div class="note-txt">${E(note.text)}</div><div class="s" style="margin-top:auto">${t(note.from_user)} → ${t(note.to_user)} · ${ago(note.created_at)}</div>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('noNotes')}</div>`}</div>`;
   updAnalog(d);
