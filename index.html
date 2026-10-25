@@ -296,6 +296,87 @@ html{word-break:keep-all}
 .wg2 .w-photo{grid-column:1;grid-row:span 2}
 .wg2 .w:not(.w-photo){grid-column:span 2}
 
+/* ---- v7: scale down, Home fits without scrolling ---- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{font-size:17px}
+.hj{font-size:.92em;opacity:.85}
+#app{gap:10px}
+aside{width:190px;padding:10px 7px 7px;border-radius:26px}
+.brand{padding:0 8px 4px}.brand .sub{font-size:15px}
+.nr{min-height:36px;font-size:17px;padding:2px 8px;gap:10px;border-radius:12px}
+.nr .ic{width:28px;height:28px;font-size:16px;border-radius:8px}
+.nr .bd{font-size:14px}.nr .bd.hot{padding:1px 8px;min-width:24px}
+.av{width:42px;height:42px;font-size:19px;border-width:2.5px}
+.who{gap:10px}.who .nm{font-size:17px}
+main{gap:7px}
+.top{min-height:44px}
+#pageTitle{font-size:28px;letter-spacing:-.5px}
+.capsule{padding:3px}
+.cbtn{width:42px;height:42px;font-size:18px}
+#ctxAdd{font-size:28px}
+#roastBar{min-height:48px;padding:6px 18px;border-radius:20px}
+#roast{font-size:21px}
+.cap{font-size:16px;padding:9px 16px}
+.pill,#cFilter .pill{font-size:15px;padding:7px 13px}
+.dot{width:11px;height:11px}
+.tiles{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.tile{min-height:108px;padding:12px;border-radius:20px}
+.ico{width:44px;height:44px;font-size:23px}
+.tile .t{font-size:18px}
+.m{font-size:13px}
+.tag{font-size:12px;padding:2px 9px}
+.x{width:34px;height:34px;font-size:20px;top:8px;right:8px}
+.grp{font-size:13px;margin:10px 4px 6px}
+.trow{padding:9px 54px 9px 12px;gap:12px;border-radius:18px;margin-bottom:7px}
+.chk{width:40px;height:40px;font-size:20px;border-width:2.5px}
+.trow .t{font-size:18px}
+.notes{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.note{padding:12px 14px;min-height:100px;border-radius:20px}
+.note .meta{font-size:13px}.note .body{font-size:19px}
+.newb{font-size:11px;padding:1px 7px}
+.photos{grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px}
+.ph{border-radius:16px}
+.pre .cap{font-size:17px;padding:11px 16px}
+.timer{padding:12px 16px;border-radius:20px;gap:14px}
+.timer .bigt{font-size:50px;min-width:140px}
+.timer .lbl{font-size:19px}
+.card{border-radius:26px;padding:16px 18px}
+.card h3{font-size:23px}
+.fld{font-size:18px;padding:11px 15px;border-radius:16px}
+.flbl{font-size:14px;min-width:56px}
+.seg button{font-size:16px;padding:8px 13px}
+input[type=date].fld,input[type=number].fld{font-size:17px;padding:9px 13px}
+#toast{font-size:16px;padding:10px 20px}
+.rl{font-size:16px}
+#alarm h1{font-size:56px}#alarm p{font-size:26px}
+.empty{font-size:17px;padding:28px 10px}
+
+/* Home: fixed grid that always fills the screen, no scrolling */
+#s-home.on{display:grid;grid-template-columns:1fr 1fr 1.1fr;grid-template-rows:1.3fr 1fr;gap:10px;overflow:hidden;padding:0}
+#widgets,#widgets2{display:contents}
+#s-home .w{min-height:0;border-radius:22px;padding:12px 14px}
+#s-home .w-clock{grid-area:1/1;container-type:size;padding:12px 16px}
+#s-home .w-analog{grid-area:1/2;padding:8px}
+#s-home .w-photo{grid-area:1/3/3/4;padding:0}
+#s-home [data-go=tasks]{grid-area:2/1}
+#s-home [data-go=notes]{grid-area:2/2}
+.w-clock .wl{font-size:13px}
+.w-clock .tm{font-size:min(44cqh,34cqw);letter-spacing:-2px}
+.w-clock .tm.long{font-size:min(36cqh,27cqw)}
+.w-clock .ap{font-size:.3em;letter-spacing:0;margin-left:3px}
+.w-clock .ap2{font-size:15px;margin-top:0}
+.w-clock .dt{font-size:16px}
+.w .wl{font-size:12px;letter-spacing:.5px}
+.w .s{font-size:13px}
+.wl2{margin-top:6px;gap:4px}
+.wl2 li{font-size:15px}
+.wl2 .due{font-size:12px!important}
+.note-txt{font-size:16px;-webkit-line-clamp:2;margin-top:6px}
+.w-photo .ov{font-size:14px;padding:10px 12px}
+#s-home.on{grid-template-rows:1.2fr 1fr}
+.wl2 li{gap:8px}.wl2 li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#s-home [data-go=notes] .note-txt{font-size:15px;line-height:1.2}
+
 @media (orientation:portrait){
  #app{flex-direction:column-reverse;padding-left:12px;padding-right:12px}
  aside{width:auto;flex-direction:row;padding:6px;border-radius:999px;overflow-x:auto}
@@ -517,7 +598,7 @@ function renderWidgets(){
   $('#widgets').innerHTML=`
   <div class="w w-clock glass">
     <div class="wl">${ann(d.toLocaleDateString(loc,{weekday:'long'}))}</div>
-    <div><div class="tm" style="font-size:${hm.length>4?76:92}px">${esc(hm)}${dp&&S.lang!=='ko'?`<span class="ap">${ann(dp)}</span>`:''}</div>${dp&&S.lang==='ko'?`<div class="ap2">${ann(dp)}</div>`:''}</div>
+    <div><div class="tm ${hm.length>4?'long':''}">${esc(hm)}${dp&&S.lang!=='ko'?`<span class="ap">${ann(dp)}</span>`:''}</div>${dp&&S.lang==='ko'?`<div class="ap2">${ann(dp)}</div>`:''}</div>
     <div class="dt">${esc(d.toLocaleDateString(loc,{month:'long',day:'numeric'}))}</div></div>
   <div class="w w-analog glass">${analogSVG()}</div>`;
   const due=ot.slice().sort((a,b)=>(a.due_date||'9999').localeCompare(b.due_date||'9999')).slice(0,3);
@@ -525,8 +606,8 @@ function renderWidgets(){
   $('#widgets2').innerHTML=`
   <div class="w w-photo glass press" data-go="photos" style="${widgetPhoto?`background-image:url('${photoUrl(widgetPhoto)}')`:''}">
     ${widgetPhoto?`<div class="ov">🖼️ ${t('nPhotos',S.photos.length)}</div>`:`<div style="margin:auto;text-align:center;font-size:18px;font-weight:700;color:var(--mute);padding:10px">🖼️<br>${t('tapAddPhotos')}</div>`}</div>
-  <div class="w glass press" data-go="tasks"><div class="wl">📋 ${t('dueSoon')}</div>${due.length?`<ul class="wl2">${due.map(x=>{const di=dueInfo(x.due_date);return`<li><span>${E(x.title)}</span><span class="due ${di.cls}" style="font-size:15px">${di.txt}</span></li>`}).join('')}</ul>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('nothingDue')}</div>`}</div>
-  <div class="w glass press" data-go="notes"><div class="wl">💌 ${t('latestNote')} ${note&&!note.read&&forMe(note)?`<span class="newb">${t('newB')}</span>`:''}</div>${note?`<div class="note-txt">${E(note.text)}</div><div class="s" style="margin-top:auto">${t(note.from_user)} → ${t(note.to_user)} · ${ago(note.created_at)}</div>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('noNotes')}</div>`}</div>`;
+  <div class="w glass press" data-go="tasks"><div class="wl">📋 ${t('dueSoon')}</div>${due.length?`<ul class="wl2">${due.map(x=>{const di=dueInfo(x.due_date);return`<li><i class="dot" style="background:${di.cls==='over'?'var(--danger)':di.cls==='today'?'var(--warn)':'rgba(255,255,255,.45)'}"></i><span>${E(x.title)}</span></li>`}).join('')}</ul>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('nothingDue')}</div>`}</div>
+  <div class="w glass press" data-go="notes"><div class="wl">💌 ${t('latestNote')} ${note&&!note.read&&forMe(note)?`<span class="newb">${t('newB')}</span>`:''}</div>${note?`<div class="note-txt">${E(note.text)}</div><div class="s" style="margin-top:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t(note.from_user)} · ${ago(note.created_at)}</div>`:`<div class="s" style="margin-top:auto;font-size:19px">${t('noNotes')}</div>`}</div>`;
   updAnalog(d);
 }
 function renderChores(){
